@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {browserHistory} from 'react-router'
-import {AUTH_USER,UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE} from './types'
+import {AUTH_USER,UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_PRODUCTS} from './types'
 import history from '../history'
 
 const ROOT_URL = 'http://localhost:4741'
@@ -11,7 +11,7 @@ export function signinUser ({email, password}){
       .then(response => {
         dispatch({type: AUTH_USER})
         localStorage.setItem('token', response.data.token)
-        history.push('/feature')
+        history.push('/main')
       })
       .catch(()=>{
         dispatch(authError('Bad Login Info'))
@@ -25,7 +25,7 @@ export function signUpUser({email, password}){
     .then(response =>{
       dispatch({type: AUTH_USER})
       localStorage.setItem('token', response.data.token)
-      history.push('/feature')
+      history.push('/main')
     })
     //originil is without name on it
     .catch(error => dispatch(authError(error.response.data.error.name)))
@@ -55,5 +55,20 @@ export function fetchMessage(){
         payload: response.data.message
       })
     })
+  }
+}
+
+export function fetchAllProducts(){
+  return function(dispatch){
+    axios.get(ROOT_URL, {
+      headers: {authorization: localStorage.getItem('token')}
+    })
+    .then(response => {
+      console.log(response)
+      dispatch({
+        type: FETCH_PRODUCTS,
+        payload: response.data.product
+      })
+    } )
   }
 }

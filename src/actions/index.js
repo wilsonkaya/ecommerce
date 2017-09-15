@@ -60,14 +60,13 @@ export function fetchMessage(){
 
 export function fetchAllProducts(){
   return function(dispatch){
-    axios.get(ROOT_URL, {
+    axios.get(`${ROOT_URL}/products`, {
       headers: {authorization: localStorage.getItem('token')}
     })
     .then(response => {
-      console.log(response)
       dispatch({
         type: FETCH_PRODUCTS,
-        payload: response.data.product
+        payload: response.data.products
       })
     } )
   }

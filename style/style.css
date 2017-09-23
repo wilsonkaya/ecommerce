@@ -1,0 +1,9 @@
+#item-img {
+  max-width: 100%
+}
+
+#product-card{
+  width: 290px;
+  float: left;
+  margin: 10px
+}

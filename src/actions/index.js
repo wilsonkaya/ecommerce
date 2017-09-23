@@ -1,6 +1,13 @@
 import axios from 'axios'
 import {browserHistory} from 'react-router'
-import {AUTH_USER,UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_PRODUCTS} from './types'
+import {
+  AUTH_USER,UNAUTH_USER,
+  AUTH_ERROR,
+  FETCH_MESSAGE,
+  FETCH_PRODUCTS,
+  GET_PRICE,
+  ADD_PRICE
+} from './types'
 import history from '../history'
 
 const ROOT_URL = 'http://localhost:4741'
@@ -69,5 +76,20 @@ export function fetchAllProducts(){
         payload: response.data.products
       })
     } )
+  }
+}
+
+//order
+export function getTotalPrice(price){
+  return {
+    type: GET_PRICE,
+    payload: price
+  }
+}
+
+export function addPrice(price){
+  return {
+    type: ADD_PRICE,
+    payload: price
   }
 }

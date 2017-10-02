@@ -1,4 +1,4 @@
-import {GET_PRICE, ADD_PRICE} from '../actions/types'
+import {GET_PRICE, ADD_PRICE, SAVE_PRICE} from '../actions/types'
 
 export default function (state = [], action) {
   switch(action.type){
@@ -9,7 +9,9 @@ export default function (state = [], action) {
     // const newState = {...state}
     // newState[price.id] = price
     // return newState
-    return {...state, [action.payload.id]: action.payload }
+      return {...state, [action.payload.id]: action.payload }
+    case SAVE_PRICE:
+      console.log(action.payload)
   }
   return state
 }

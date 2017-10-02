@@ -7,12 +7,16 @@ class Order extends Component{
   componentWillMount(){
     this.props.getTotalPrice(0)
   }
+  sendDataToSaveBooks(){
+    this.props.savePrice()
+  }
   getPrice(){
   return  _.map(this.props.price, item =>{
       return (
         <div>
-          <p>{item.name}</p>
-          <p>{item.price}</p>
+          <p>{item.title}</p>
+          <p>{item.release_date}</p>
+          <button type="button" className="btn btn-danger">delete</button>
         </div>
 
       )
@@ -24,7 +28,7 @@ class Order extends Component{
         <h2>Order</h2>
         {this.getPrice()}
         {this.props.totalPrice}
-        <button>Checkout</button>
+        <button className="btn btn-info" onClick={() => this.sendDataToSaveBooks()}>Checkout</button>
       </div>
     )
   }

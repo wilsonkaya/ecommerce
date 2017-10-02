@@ -6,7 +6,8 @@ import {
   FETCH_MESSAGE,
   FETCH_PRODUCTS,
   GET_PRICE,
-  ADD_PRICE
+  ADD_PRICE,
+  SAVE_PRICE
 } from './types'
 import history from '../history'
 
@@ -17,7 +18,8 @@ export function signinUser ({email, password}){
     axios.post(`${ROOT_URL}/sign-in`, {email, password})
       .then(response => {
         dispatch({type: AUTH_USER})
-        localStorage.setItem('token', response.data.token)
+        localStorage.setItem('token', response.data.user.token)
+        localStorage.setItem('userId', response.data.user.id)
         history.push('/main')
       })
       .catch(()=>{
@@ -65,17 +67,34 @@ export function fetchMessage(){
   }
 }
 
+// export function fetchAllProducts(){
+//   return function(dispatch){
+//     axios.get(`${ROOT_URL}/products`, {
+//       headers: {authorization: localStorage.getItem('token')}
+//     })
+//     .then(response => {
+//       dispatch({
+//         type: FETCH_PRODUCTS,
+//         payload: response.data.products
+//       })
+//     } )
+//   }
+// }
+
 export function fetchAllProducts(){
   return function(dispatch){
-    axios.get(`${ROOT_URL}/products`, {
-      headers: {authorization: localStorage.getItem('token')}
-    })
-    .then(response => {
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: response.data.products
+    axios.get("https://api.themoviedb.org/3/movie/upcoming?api_key=cb019ff660d65f8b659b56ecef703166&language=en-US&page=1")
+      .then(response => {
+        dispatch({
+          type: FETCH_PRODUCTS,
+          payload: response.data.results
+        })
       })
-    } )
+      // .then(response => {
+      //   response.data.results.forEach(x =>{
+      //     console.log(x.poster_path)
+      //   })
+      // })
   }
 }
 
@@ -91,5 +110,12 @@ export function addPrice(price){
   return {
     type: ADD_PRICE,
     payload: price
+  }
+}
+
+export function savePrice(){
+  return {
+    type: SAVE_PRICE,
+    payload: localStorage.getItem('userId')
   }
 }

@@ -20,13 +20,13 @@ class Main extends Component{
       product = product
        return(
         <div className="card" id="product-card" key={product.id}>
-          <img className="img-fluid" id="item-img" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap"/>
+          <img className="img-fluid" id="item-img" src={`https://image.tmdb.org/t/p/w500${product.poster_path}`} alt="Card image cap"/>
 
           <div className="card-body">
-              <h4 className="card-title">{product.name}</h4>
-              <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <p>{product.text}</p>
-              <p>{product.price}</p>
+              <h4 className="card-title">{product.title}</h4>
+              <p>{product.vote_average}</p>
+              <p>{product.overview}</p>
+              <p>{product.release_date}</p>
               <button onClick={() => this.addPriceOnClick(product)}>Add to cart</button>
           </div>
         </div>
@@ -36,7 +36,7 @@ class Main extends Component{
 
   render(){
     return(
-      <div>
+      <div id="main-body">
         {this.deneme()}
         <Order/>
       </div>

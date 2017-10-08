@@ -32,13 +32,29 @@ class Order extends Component{
       )
     })
   }
+
+  showMyMovies(){
+      return _.map(this.props.movies, items =>{
+        return items.map(item =>{
+         return(
+           <div>
+            <p>{item.title}</p>
+            <p>{item.date}</p>
+            <button className="btn btn-danger">Delete</button>
+           </div>
+         )
+       })
+      })
+  }
+
   render(){
     return(
       <div>
         <h2>Order</h2>
         {this.getPrice()}
         {this.props.totalPrice}
-        <button className="btn btn-info" onClick={() => this.sendDataToSaveBooks()}>Checkout</button>
+        <button className="btn btn-info" onClick={() => this.sendDataToSaveBooks()}>Add to list</button>
+        {this.showMyMovies()}
       </div>
     )
   }
@@ -53,7 +69,8 @@ return result
 function mapStateToProps(state){
   return {
     price: state.price,
-    totalPrice: totalPrice(state.price)
+    totalPrice: totalPrice(state.price),
+    movies: state.movies
   }
 }
 

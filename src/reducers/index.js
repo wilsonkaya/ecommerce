@@ -4,6 +4,7 @@ import authReducer from './auth_reducer'
 import messageReducer from './message_reducer'
 import productReducer from './product_reducer'
 import priceReducer from './order_reducer'
+import mymovies from './my_movies_reducer'
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,9 @@ const rootReducer = combineReducers({
   auth: authReducer,
   message: messageReducer,
   product: productReducer,
-  price: priceReducer
+  price: priceReducer,
+  movies: mymovies
+
 });
 
 export default rootReducer;

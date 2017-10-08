@@ -7,7 +7,8 @@ import {
   FETCH_PRODUCTS,
   GET_PRICE,
   ADD_PRICE,
-  SAVE_PRICE
+  SAVE_PRICE,
+  MY_MOVIES
 } from './types'
 import history from '../history'
 
@@ -124,7 +125,10 @@ export function getMovies(){
   return function(dispatch){
     axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
     .then(response => {
-      console.log(response)
+      dispatch({
+        type: MY_MOVIES,
+        payload: response.data.lists
+      })
     })
   }
 }

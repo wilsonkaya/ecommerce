@@ -113,9 +113,18 @@ export function addPrice(price){
   }
 }
 
-export function savePrice(){
-  return {
-    type: SAVE_PRICE,
-    payload: localStorage.getItem('userId')
+export function saveMovies(list){
+  return function(dispatch){
+    axios.post(`${ROOT_URL}/lists`, {list, user:localStorage.getItem('userId')})
+
+  }
+}
+
+export function getMovies(){
+  return function(dispatch){
+    axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
+    .then(response => {
+      console.log(response)
+    })
   }
 }

@@ -6,9 +6,19 @@ import _ from "lodash"
 class Order extends Component{
   componentWillMount(){
     this.props.getTotalPrice(0)
+
+  }
+  componentDidMount(){
+    this.props.getMovies()
   }
   sendDataToSaveBooks(){
-    this.props.savePrice()
+    _.map(this.props.price, item => {
+      let list = {
+        title:item.title,
+        date: item.release_date
+      }
+      this.props.saveMovies(list)
+    })
   }
   getPrice(){
   return  _.map(this.props.price, item =>{

@@ -1,9 +1,12 @@
 #item-img {
-  max-width: 100%
+  max-width: 20%;
+  float: left;
 }
 
 #product-card{
-  width: 290px;
+  width: 800px;
+  length: 100px;
   float: left;
-  margin: 10px
+  margin: 10px;
+  display: inline-block;
 }

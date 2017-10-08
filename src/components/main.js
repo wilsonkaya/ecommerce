@@ -20,7 +20,7 @@ class Main extends Component{
       product = product
        return(
         <div className="card" id="product-card" key={product.id}>
-          <img className="img-fluid" id="item-img" src={`https://image.tmdb.org/t/p/w500${product.poster_path}`} alt="Card image cap"/>
+          <img id="item-img" src={`https://image.tmdb.org/t/p/w500${product.poster_path}`} alt="Card image cap"/>
 
           <div className="card-body">
               <h4 className="card-title">{product.title}</h4>

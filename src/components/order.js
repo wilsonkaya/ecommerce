@@ -6,11 +6,14 @@ import _ from "lodash"
 class Order extends Component{
   componentWillMount(){
     this.props.getTotalPrice(0)
-
   }
+  // componentWillUpdate(){
+  //   this.props.getMovies()
+  // }
   componentDidMount(){
     this.props.getMovies()
   }
+  
   sendDataToSaveBooks(){
     _.map(this.props.price, item => {
       let list = {
@@ -33,6 +36,10 @@ class Order extends Component{
     })
   }
 
+  deleteMovie(id){
+    this.props.deleteMovie(id)
+  }
+
   showMyMovies(){
       return _.map(this.props.movies, items =>{
         return items.map(item =>{
@@ -40,7 +47,7 @@ class Order extends Component{
            <div>
             <p>{item.title}</p>
             <p>{item.date}</p>
-            <button className="btn btn-danger">Delete</button>
+            <button className="btn btn-danger" onClick={() => this.deleteMovie(item.id)}>Delete</button>
            </div>
          )
        })

@@ -117,7 +117,17 @@ export function addPrice(price){
 export function saveMovies(list){
   return function(dispatch){
     axios.post(`${ROOT_URL}/lists`, {list, user:localStorage.getItem('userId')})
-
+    // .then(response => {
+    //   if(response.status == 204){
+    //     axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
+    //     .then(response => {
+    //       dispatch({
+    //         type: MY_MOVIES,
+    //         payload: response.data.lists
+    //       })
+    //     })
+    //   }
+    // })
   }
 }
 
@@ -129,6 +139,23 @@ export function getMovies(){
         type: MY_MOVIES,
         payload: response.data.lists
       })
+    })
+  }
+}
+
+export function deleteMovie(id){
+  return function(dispatch){
+    axios.delete(`${ROOT_URL}/lists`, {params:{ID: id}})
+    .then(response => {
+      if(response.status == 204){
+        axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
+        .then(response => {
+          dispatch({
+            type: MY_MOVIES,
+            payload: response.data.lists
+          })
+        })
+      }
     })
   }
 }

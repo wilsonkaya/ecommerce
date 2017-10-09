@@ -16,7 +16,7 @@ class Main extends Component{
 
   deneme(){
     let product
-    return _.map(this.props.product, product =>{
+    return _.map(this.props.product, product => {
       product = product
        return(
         <div className="card" id="product-card" key={product.id}>

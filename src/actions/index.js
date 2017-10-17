@@ -124,18 +124,15 @@ export function saveMovies(list){
           payload: {}
         })
       })
-    // .then(response => {
-    //   if(response.status == 204){
-    //     axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
-    //     .then(response => {
-    //       dispatch({
-    //         type: MY_MOVIES,
-    //         payload: response.data.lists
-    //       })
-    //     })
-    //   }
-    // })
+      axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
+      .then(response => {
+        dispatch({
+          type: MY_MOVIES,
+          payload: response.data.lists
+        })
+      })
   }
+
 }
 
 export function getMovies(){

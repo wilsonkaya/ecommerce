@@ -8,7 +8,8 @@ import {
   GET_PRICE,
   ADD_PRICE,
   SAVE_PRICE,
-  MY_MOVIES
+  MY_MOVIES,
+  REMOVE_PRICE
 } from './types'
 import history from '../history'
 
@@ -117,6 +118,12 @@ export function addPrice(price){
 export function saveMovies(list){
   return function(dispatch){
     axios.post(`${ROOT_URL}/lists`, {list, user:localStorage.getItem('userId')})
+      .then(response => {
+        dispatch({
+          type: REMOVE_PRICE,
+          payload: {}
+        })
+      })
     // .then(response => {
     //   if(response.status == 204){
     //     axios.get(`${ROOT_URL}/lists`, {params:{ID:localStorage.getItem('userId')}})
